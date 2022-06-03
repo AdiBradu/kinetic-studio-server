@@ -1,5 +1,5 @@
-const { GraphQLID, GraphQLString, GraphQLInt, GraphQLFloat } = require("graphql");
-const { EmailType } = require("../typeDefs/email");
+const { GraphQLID, GraphQLString, GraphQLInt, GraphQLFloat, GraphQLList } = require("graphql");
+const { EmailType, EmailInputType } = require("../typeDefs/email");
 const { MessageType } = require("../typeDefs/messages");
 const conn = require('../../db/db_connection.js');
 
@@ -31,7 +31,7 @@ exports.CREATE_EMAIL = {
 exports.UPDATE_EMAIL = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     email_subject: { type: GraphQLString }, 
     email_body: { type: GraphQLFloat },    
   },
@@ -51,10 +51,34 @@ exports.UPDATE_EMAIL = {
   },
 };
 
+
+exports.HANDLE_EMAILS = {
+  type: MessageType,
+  args: {
+    emails: { type: new GraphQLList(EmailInputType) }
+  },
+  async resolve(parent, args, context) {
+    const { req } = context;
+    if(!req.session || !req.session.userId) {
+      throw new Error("Access denied!");
+    }
+    for (let el of args.emails.slice()) {
+      if(el.id > 0) {
+        await conn.promise().query(`UPDATE emails SET email_subject = ? , email_body = ? , updated = ? WHERE e_id = ? `, [el.email_subject, el.email_body, Date.now(), el.id]);
+      } else {
+        let sql = `INSERT INTO emails
+        (email_subject, email_body, created, updated) VALUES (?,?,?,?)`;
+        let result = await conn.promise().query(sql, [el.email_subject, el.email_body, Date.now(), Date.now()]);
+      }
+    }
+    return { successful: true, message: "Success!" };
+  },
+}
+
 exports.DELETE_EMAIL = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

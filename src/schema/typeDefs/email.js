@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLFloat } = require("graphql");
+const { GraphQLObjectType, GraphQLInputObjectType, GraphQLID, GraphQLString, GraphQLFloat } = require("graphql");
 
 exports.EmailType = new GraphQLObjectType({
   name: "Email",
@@ -8,5 +8,14 @@ exports.EmailType = new GraphQLObjectType({
     email_body: { type: GraphQLString },
     created: { type: GraphQLFloat },
     updated: { type: GraphQLFloat },
+  }),
+});
+
+exports.EmailInputType = new GraphQLInputObjectType({
+  name: "EmailInput",
+  fields: () => ({
+    id: { type: GraphQLFloat },
+    email_subject: { type: GraphQLString },
+    email_body: { type: GraphQLString },  
   }),
 });

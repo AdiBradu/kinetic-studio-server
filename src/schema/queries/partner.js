@@ -1,4 +1,4 @@
-const { GraphQLList, GraphQLID } = require("graphql");
+const { GraphQLList, GraphQLID, GraphQLFloat } = require("graphql");
 const { PartnerType } = require("../typeDefs/partner");
 const conn = require('../../db/db_connection.js');
 
@@ -18,7 +18,7 @@ exports.GET_ALL_PARTNERS = {
 exports.GET_PARTNER = {
   type: PartnerType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;    

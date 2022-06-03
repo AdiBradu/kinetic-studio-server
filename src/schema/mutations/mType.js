@@ -29,7 +29,7 @@ exports.CREATE_M_TYPE = {
 exports.UPDATE_M_TYPE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     name: { type: GraphQLString }, 
   },
   async resolve(parent, args, context) {
@@ -50,7 +50,7 @@ exports.UPDATE_M_TYPE = {
 exports.DELETE_M_TYPE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

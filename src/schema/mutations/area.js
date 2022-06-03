@@ -31,7 +31,7 @@ exports.CREATE_AREA = {
 exports.UPDATE_AREA = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     name: { type: GraphQLString }, 
     extra_charge: { type: GraphQLFloat },    
   },
@@ -58,7 +58,7 @@ exports.UPDATE_AREA = {
 exports.DELETE_AREA = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

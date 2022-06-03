@@ -1,4 +1,4 @@
-const { GraphQLList, GraphQLID } = require("graphql");
+const { GraphQLList, GraphQLID, GraphQLFloat } = require("graphql");
 const { MType } = require("../typeDefs/mType");
 const conn = require('../../db/db_connection.js');
 
@@ -14,7 +14,7 @@ exports.GET_ALL_M_TYPES = {
 exports.GET_M_TYPE = {
   type: MType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {   
     let sql = `SELECT * FROM m_types WHERE mt_id = ?`;

@@ -6,7 +6,7 @@ const conn = require('../../db/db_connection.js');
 exports.CREATE_PARTNER_SCHEDULE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     startTime: { type: GraphQLFloat }, 
     endTime: { type: GraphQLFloat },    
   },
@@ -32,7 +32,7 @@ exports.CREATE_PARTNER_SCHEDULE = {
 exports.UPDATE_PARTNER_SCHEDULE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     startTime: { type: GraphQLFloat }, 
     endTime: { type: GraphQLFloat },    
   },
@@ -55,7 +55,7 @@ exports.UPDATE_PARTNER_SCHEDULE = {
 exports.DELETE_PARTNER_SCHEDULE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

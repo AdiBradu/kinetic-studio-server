@@ -33,7 +33,7 @@ exports.CREATE_ORDER_DETAIL = {
 exports.UPDATE_ORDER_DETAIL = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     orderId: { type: GraphQLFloat }, 
     partnerId: { type: GraphQLFloat },   
     startTime: { type: GraphQLFloat },
@@ -58,7 +58,7 @@ exports.UPDATE_ORDER_DETAIL = {
 exports.DELETE_ORDER_DETAIL = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

@@ -1,4 +1,4 @@
-const { GraphQLList, GraphQLID } = require("graphql");
+const { GraphQLList, GraphQLID, GraphQLFloat } = require("graphql");
 const { AreaType } = require("../typeDefs/area");
 const conn = require('../../db/db_connection.js');
 
@@ -18,7 +18,7 @@ exports.GET_ALL_AREAS = {
 exports.GET_AREA = {
   type: AreaType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

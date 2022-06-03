@@ -34,7 +34,7 @@ exports.CREATE_SERVICE = {
 exports.UPDATE_SERVICE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     service_name: { type: GraphQLString }, 
     type: { type: GraphQLFloat },    
     appointments_number: { type: GraphQLInt },
@@ -60,7 +60,7 @@ exports.UPDATE_SERVICE = {
 exports.DELETE_SERVICE = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

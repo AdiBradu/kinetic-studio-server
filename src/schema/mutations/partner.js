@@ -11,7 +11,8 @@ exports.CREATE_PARTNER = {
     phone: { type: GraphQLString }, 
     email: { type: GraphQLString }, 
     profilePictureUrl: { type: GraphQLString }, 
-    description: { type: GraphQLString },     
+    description: { type: GraphQLString }, 
+    mTypes: { type: GraphQLString },    
   },
   async resolve(parent, args, context) {
     const { req } = context;
@@ -20,8 +21,8 @@ exports.CREATE_PARTNER = {
     }
       
     const sql = `INSERT INTO partners
-    (first_name, last_name, phone, email, profile_picture_url, description, created, updated) VALUES (?,?,?,?,?,?,?,?)`;
-    const result = await conn.promise().query(sql, [args.firstName, args.lastName, args.phone, args.email, args.profilePictureUrl, args.description, Date.now(), Date.now()]);
+    (first_name, last_name, phone, email, profile_picture_url, m_types, description, created, updated) VALUES (?,?,?,?,?,?,?,?,?)`;
+    const result = await conn.promise().query(sql, [args.firstName, args.lastName, args.phone, args.email, args.profilePictureUrl, args.mTypes, args.description, Date.now(), Date.now()]);
     const lastInsId = result ? result.insertId : 0;    
     let successful = false;
     if(result[0].insertId && result[0].insertId > 0) {
@@ -35,13 +36,14 @@ exports.CREATE_PARTNER = {
 exports.UPDATE_PARTNER = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
     firstName: { type: GraphQLString }, 
     lastName: { type: GraphQLString }, 
     phone: { type: GraphQLString }, 
     email: { type: GraphQLString }, 
     profilePictureUrl: { type: GraphQLString }, 
     description: { type: GraphQLString },        
+    mTypes: { type: GraphQLString },    
   },
   async resolve(parent, args, context) {
     const { req } = context;
@@ -53,7 +55,7 @@ exports.UPDATE_PARTNER = {
     if (!partner[0].length) {
       throw new Error("Partner not found");
     }
-    await conn.promise().query(`UPDATE partners SET first_name = ? , last_name = ? , phone = ? , email = ? , profile_picture_url = ? , description = ? , updated = ? WHERE p_id = ? `, [args.firstName, args.lastName, args.phone, args.email, args.profilePictureUrl, args.description, Date.now(), args.id]);
+    await conn.promise().query(`UPDATE partners SET first_name = ? , last_name = ? , phone = ? , email = ? , profile_picture_url = ? , m_types = ? , description = ? , updated = ? WHERE p_id = ? `, [args.firstName, args.lastName, args.phone, args.email, args.profilePictureUrl, args.mTypes, args.description, Date.now(), args.id]);
     return { successful: true, message: "Partner updated!" };
   },
 };
@@ -61,7 +63,7 @@ exports.UPDATE_PARTNER = {
 exports.DELETE_PARTNER = {
   type: MessageType,
   args: {
-    id: { type: GraphQLID },
+    id: { type: GraphQLFloat },
   },
   async resolve(parent, args, context) {
     const { req } = context;

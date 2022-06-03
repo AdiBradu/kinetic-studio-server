@@ -11,3 +11,11 @@ exports.PartnerScheduleType = new GraphQLObjectType({
     updated: { type: GraphQLFloat },
   }),
 });
+
+exports.PartnerScheduledType = new GraphQLObjectType({
+  name: "PartnerScheduled",
+  fields: () => ({
+    schedule_start: { type: GraphQLFloat },
+    schedule_end: { type: GraphQLFloat },    
+  }),
+});
