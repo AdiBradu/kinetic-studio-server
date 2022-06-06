@@ -18,7 +18,7 @@ const main = async () => {
   app.use(express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 
   var corsOptions = {
-    origin: process.env.CLIENT_FOR_THE_API,
+    origin: [process.env.CLIENT_FOR_THE_API, process.env.CLIENT_FOR_THE_API2],
     optionsSuccessStatus: 200, 
     credentials: true
   }

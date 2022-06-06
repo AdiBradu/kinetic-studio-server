@@ -11,8 +11,8 @@ exports.UserType = new GraphQLObjectType({
     phone: { type: GraphQLString },
     profile_picture_url: { type: GraphQLString },   
     password: { type: GraphQLString },
-    created: { type: GraphQLInt },
-    updated: { type: GraphQLInt },
+    created: { type: GraphQLFloat },
+    updated: { type: GraphQLFloat },
   }),
 });
 
@@ -26,7 +26,7 @@ exports.UserWithoutPassType = new GraphQLObjectType({
     email: { type: GraphQLString },
     phone: { type: GraphQLString },
     profile_picture_url: { type: GraphQLString },   
-    created: { type: GraphQLInt },
-    updated: { type: GraphQLInt },
+    created: { type: GraphQLFloat },
+    updated: { type: GraphQLFloat },
   }),
 });
