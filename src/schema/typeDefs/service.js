@@ -1,4 +1,10 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLFloat, GraphQLInt } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLFloat,
+  GraphQLInt,
+} = require("graphql");
 
 exports.ServiceType = new GraphQLObjectType({
   name: "Service",
@@ -7,9 +13,10 @@ exports.ServiceType = new GraphQLObjectType({
     service_name: { type: GraphQLString },
     m_type_id: { type: GraphQLFloat },
     mt_name: { type: GraphQLString },
-    appointments_number: { type: GraphQLInt},
-    appointment_duration: { type: GraphQLInt},
-    service_cost: { type: GraphQLFloat},
+    appointments_number: { type: GraphQLInt },
+    appointment_duration: { type: GraphQLInt },
+    service_cost: { type: GraphQLFloat },
+    profile_picture_url: { type: GraphQLString },
     created: { type: GraphQLFloat },
     updated: { type: GraphQLFloat },
   }),
