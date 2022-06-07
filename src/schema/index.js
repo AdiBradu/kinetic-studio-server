@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLSchema } = require("graphql");
 const { GET_ALL_USERS, ME, GET_USER } = require("./queries/user");
-const { CREATE_USER, UPDATE_PASSWORD, UPDATE_USER, LOGOUT_USER, LOGIN_USER } = require("./mutations/user");
+const { CREATE_USER, UPDATE_PASSWORD, UPDATE_USER, DELETE_USER, LOGOUT_USER, LOGIN_USER } = require("./mutations/user");
 const { GET_ALL_AREAS, GET_AREA} = require("./queries/area");
 const { CREATE_AREA, UPDATE_AREA, DELETE_AREA } = require("./mutations/area");
 const { GET_ALL_M_TYPES, GET_M_TYPE } = require("./queries/mType");
@@ -16,7 +16,7 @@ const { CREATE_PARTNER, UPDATE_PARTNER, DELETE_PARTNER } = require("./mutations/
 const { GET_ALL_ORDER_DETAILS, GET_PARTNER_FILLED_TIME_SLOTS } = require("./queries/orderDetail");
 const { CREATE_ORDER_DETAIL, UPDATE_ORDER_DETAIL, DELETE_ORDER_DETAIL } = require("./mutations/orderDetails");
 const { GET_ALL_ORDERS, GET_ORDER } = require("./queries/order");
-const { CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER } = require("./mutations/order");
+const { CREATE_ORDER, UPDATE_ORDER, DELETE_ORDER, CREATE_CUSTOMER_ORDER } = require("./mutations/order");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -50,6 +50,7 @@ const Mutation = new GraphQLObjectType({
     createUser: CREATE_USER,   
     updatePassword: UPDATE_PASSWORD,
     updateUser: UPDATE_USER,
+    deleteUser: DELETE_USER,
     logout: LOGOUT_USER,
     login: LOGIN_USER,
     createArea: CREATE_AREA,
@@ -75,6 +76,7 @@ const Mutation = new GraphQLObjectType({
     updateOrderDetail: UPDATE_ORDER_DETAIL,
     deleteOrderDetail: DELETE_ORDER_DETAIL,
     createOrder: CREATE_ORDER,
+    createCustomerOrder: CREATE_CUSTOMER_ORDER,
     updateOrder: UPDATE_ORDER,
     deleteOrder: DELETE_ORDER,
   },

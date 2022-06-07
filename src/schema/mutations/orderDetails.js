@@ -32,8 +32,7 @@ exports.CREATE_ORDER_DETAIL = {
 
 exports.UPDATE_ORDER_DETAIL = {
   type: MessageType,
-  args: {
-    id: { type: GraphQLFloat },
+  args: {   
     orderId: { type: GraphQLFloat }, 
     partnerId: { type: GraphQLFloat },   
     startTime: { type: GraphQLFloat },
@@ -45,12 +44,12 @@ exports.UPDATE_ORDER_DETAIL = {
     if(!req.session || !req.session.userId) {
       throw new Error("Access denied!");
     }   
-    let sql = `SELECT order_id FROM order_details WHERE od_id = ?`;
-    const odets = await conn.promise().query(sql, [args.id]);    
+    let sql = `SELECT service_id FROM orders WHERE o_id = ?`;
+    const odets = await conn.promise().query(sql, [args.orderId]);    
     if (!odets[0].length) {
       throw new Error("Not found");
     }
-    await conn.promise().query(`UPDATE order_details SET order_id = ? , partner_id = ? , appointment_start = ? , appointment_end = ? , appointment_order = ? ,  updated = ? WHERE od_id = ? `, [args.orderId, args.partnerId, args.startTime, args.endTime, args.scheduleOrder, Date.now(), args.id]);
+    await conn.promise().query(`UPDATE order_details SET partner_id = ? , appointment_start = ? , appointment_end = ? ,  updated = ? WHERE (order_id = ? AND appointment_order = ?)  `, [args.partnerId, args.startTime, args.endTime, Date.now(), args.orderId, args.scheduleOrder]);
     return { successful: true, message: "Order detail updated!" };
   },
 };

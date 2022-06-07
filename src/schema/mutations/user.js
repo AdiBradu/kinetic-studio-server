@@ -199,3 +199,24 @@ exports.LOGOUT_USER = {
     return { successful: true, message: "Logged out!" };
   },
 };
+
+exports.DELETE_USER = {
+  type: MessageType,
+  args: {
+    id: { type: GraphQLFloat },
+  },
+  async resolve(parent, args, context) {
+    const { req } = context;
+    if(!req.session || !req.session.userId) {
+      throw new Error("Access denied!");
+    }   
+    let successful = false; 
+    let retMsg = 'Can not delete your own user';
+    if(args.id !== parseFloat(req.session.userId)){
+      await conn.promise().query(`DELETE FROM users WHERE u_id = ?`, [args.id]);
+      successful = true;
+      retMsg = 'User successfully deleted';
+    }
+    return { successful: successful, message: retMsg };
+  },
+};
