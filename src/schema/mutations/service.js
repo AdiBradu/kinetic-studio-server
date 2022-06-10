@@ -105,9 +105,10 @@ exports.DELETE_SERVICE = {
     if (!req.session || !req.session.userId) {
       throw new Error("Access denied!");
     }
+
     await conn
       .promise()
-      .query(`DELETE FROM services WHERE s_id = ?`, [args.id]);
+      .query(`UPDATE services SET is_deleted = 1 WHERE s_id = ?`, [args.id]);
     return { successful: true, message: "Service successfully deleted" };
   },
 };

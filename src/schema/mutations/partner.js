@@ -101,9 +101,23 @@ exports.DELETE_PARTNER = {
     if (!req.session || !req.session.userId) {
       throw new Error("Access denied!");
     }
-    await conn
-      .promise()
-      .query(`DELETE FROM partners WHERE p_id = ?`, [args.id]);
-    return { successful: true, message: "Partner successfully deleted" };
+    let successful = false;
+    let message = `Eroare! Terapeutul inclus in sedinte programate in viitor`;
+    let currentDateTime = new Date().now();
+    let sqlHasPendingAppointments = `SELECT od_id 
+                                      FROM order_details 
+                                      WHERE partner_id = ? AND appointment_end > ?`;
+    let resHasPendingAppointments = await conn.promise().query(sqlHasPendingAppointments, [args.id, currentDateTime]);
+    if (!resHasPendingAppointments[0].length) {     
+      await conn
+        .promise()
+        .query(`UPDATE partners SET is_deleted = 1 WHERE p_id = ?`, [args.id]);                             
+      await conn
+        .promise()
+        .query(`DELETE FROM partner_schedule WHERE partner_id = ?`, [args.id]);
+      successful = true;
+      message = `Terapeut deleted`;
+    }
+    return { successful: successful, message: message };
   },
 };

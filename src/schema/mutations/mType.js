@@ -60,21 +60,6 @@ exports.UPDATE_M_TYPE = {
   },
 };
 
-// exports.DELETE_M_TYPE = {
-//   type: MessageType,
-//   args: {
-//     id: { type: GraphQLFloat },
-//   },
-//   async resolve(parent, args, context) {
-//     const { req } = context;
-//     if(!req.session || !req.session.userId) {
-//       throw new Error("Access denied!");
-//     }
-//     await conn.promise().query(`DELETE FROM m_types WHERE mt_id = ?`, [args.id]);
-//     return { successful: true, message: "Successfully deleted" };
-//   },
-// };
-
 exports.DELETE_M_TYPE = {
   type: MessageType,
   args: {

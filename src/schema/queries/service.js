@@ -8,6 +8,7 @@ exports.GET_ALL_SERVICES = {
     let sql = `SELECT services.* , m_types.mt_name 
               FROM services 
               LEFT JOIN m_types ON services.m_type_id = m_types.mt_id 
+              WHERE services.is_deleted < 1 
               `;
     const services = await conn.promise().query(sql);        
     return services[0];
@@ -27,7 +28,7 @@ exports.GET_SERVICE = {
     let sql = `SELECT services.* , m_types.mt_name 
                FROM services 
                LEFT JOIN m_types ON services.m_type_id = m_types.mt_id 
-               WHERE services.s_id = ?`;
+               WHERE services.s_id = ? AND services.is_deleted < 1 `;
     let service = await conn.promise().query(sql, [args.id]);
     return service[0][0]; 
   },
