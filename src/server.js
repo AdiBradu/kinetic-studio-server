@@ -81,7 +81,7 @@ const main = async () => {
    
   //starting the server
   app.listen(port, () => 
-  console.log(`Server running on port ${port}!`)
+  console.log(`KS Server running on port ${port}!`)
   );
 }
 
