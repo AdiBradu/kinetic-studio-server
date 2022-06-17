@@ -61,30 +61,8 @@ const main = async () => {
     }
   }));
 
-  // app.use(
-  //   "/graphql",  
-  //   graphqlHTTP((req, res, graphQLParams) => {
-  //     return {
-  //       schema: schema,
-  //       graphiql: process.env.NODE_ENV !== 'PRODUCTION',
-  //       context: {
-  //         loaders: {
-  //           orderDetailsLoader: orderDetailsDataLoader()
-  //         },
-  //         req
-  //       }
-  //     }
-  //   })
-  // );
-
   app.use(
     "/graphql",  
-    function(req, res, next) {   
-      if (req.headers['origin'] !== process.env.CLIENT_FOR_THE_API && req.headers['origin'] !== process.env.CLIENT_FOR_THE_API2) {
-        throw new Error('not found');
-      } else {
-        next();
-    }},
     graphqlHTTP((req, res, graphQLParams) => {
       return {
         schema: schema,
