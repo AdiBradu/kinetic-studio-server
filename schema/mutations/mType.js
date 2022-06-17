@@ -23,7 +23,7 @@ exports.CREATE_M_TYPE = {
     (mt_name, created, updated) VALUES (?,?,?)`;
     const result = await conn
       .promise()
-      .query(sql, [name, Date.now(), Date.now()]);
+      .query(sql, [name.toLowerCase(), Date.now(), Date.now()]);
     const lastInsId = result ? result.insertId : 0;
     let successful = false;
     if (result[0].insertId && result[0].insertId > 0) {

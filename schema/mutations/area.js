@@ -17,7 +17,7 @@ exports.CREATE_AREA = {
     const { name, extra_charge } = args;      
     const sql = `INSERT INTO areas
     (a_name, a_extra_charge, created, updated) VALUES (?,?,?,?)`;
-    const result = await conn.promise().query(sql, [name, extra_charge, Date.now(), Date.now()]);
+    const result = await conn.promise().query(sql, [name.toLowerCase(), extra_charge, Date.now(), Date.now()]);
     const lastInsId = result ? result.insertId : 0;    
     let successful = false;
     if(result[0].insertId && result[0].insertId > 0) {

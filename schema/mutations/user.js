@@ -28,7 +28,7 @@ exports.CREATE_USER = {
 
     let sql = `INSERT INTO users `;
     let pass = await bcrypt.hash(args.newPassword, 10);
-    let insParams = [args.email, pass];
+    let insParams = [args.email.toLowerCase(), pass];
     let insFieldsString = ` (email, password `;
     let insValuesString = ` VALUES (?,? `;
 
@@ -47,13 +47,13 @@ exports.CREATE_USER = {
     if(args.firstName && args.firstName.length) {
       insFieldsString += `,first_name `;
       insValuesString += `,?`;      
-      insParams.push(args.firstName);  
+      insParams.push(args.firstName.toLowerCase());  
     }
 
     if(args.lastName && args.lastName.length) {
       insFieldsString += `,last_name `;
       insValuesString += `,?`;      
-      insParams.push(args.lastName);   
+      insParams.push(args.lastName.toLowerCase());   
     }
     insFieldsString += `,created,updated) `;
     insValuesString += `,?,?);`;      

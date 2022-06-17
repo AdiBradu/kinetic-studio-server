@@ -36,7 +36,7 @@ exports.CREATE_SERVICE = {
     const result = await conn
       .promise()
       .query(sql, [
-        service_name,
+        service_name.toLowerCase(),
         type,
         appointments_number,
         appointment_duration,

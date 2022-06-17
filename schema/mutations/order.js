@@ -44,7 +44,7 @@ exports.CREATE_ORDER = {
     const sql = `INSERT INTO orders
     (customer_first_name, customer_last_name, customer_phone, customer_email, customer_region, customer_city, customer_street, customer_street_number, service_id, order_subtotal, order_total, created, updated) 
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-    const result = await conn.promise().query(sql, [args.firstName, args.lastName, args.phone, args.email, args.region, args.city, args.street, args.streetNumber, args.serviceId, orderSubTotal, orderTotal, Date.now(), Date.now()]);
+    const result = await conn.promise().query(sql, [args.firstName.toLowerCase(), args.lastName.toLowerCase(), args.phone, args.email.toLowerCase(), args.region.toLowerCase(), args.city.toLowerCase(), args.street.toLowerCase(), args.streetNumber.toLowerCase(), args.serviceId, orderSubTotal, orderTotal, Date.now(), Date.now()]);
     const lastInsId = result ? result[0].insertId : 0;    
     let successful = false;
     if(!result[0].insertId) {

@@ -30,13 +30,13 @@ exports.CREATE_PARTNER = {
     const result = await conn
       .promise()
       .query(sql, [
-        args.firstName,
-        args.lastName,
+        args.firstName.toLowerCase(),
+        args.lastName.toLowerCase(),
         args.phone,
-        args.email,
+        args.email.toLowerCase(),
         args.profilePictureUrl,
-        args.mTypes,
-        args.description,
+        args.mTypes.toLowerCase(),
+        args.description.toLowerCase(),
         Date.now(),
         Date.now(),
       ]);

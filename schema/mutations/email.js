@@ -17,7 +17,7 @@ exports.CREATE_EMAIL = {
     const { email_subject, email_body } = args;      
     const sql = `INSERT INTO emails
     (email_subject, email_body, created, updated) VALUES (?,?,?,?)`;
-    const result = await conn.promise().query(sql, [email_subject, email_body, Date.now(), Date.now()]);
+    const result = await conn.promise().query(sql, [email_subject.toLowerCase(), email_body.toLowerCase(), Date.now(), Date.now()]);
     const lastInsId = result ? result.insertId : 0;    
     let successful = false;
     if(result[0].insertId && result[0].insertId > 0) {
