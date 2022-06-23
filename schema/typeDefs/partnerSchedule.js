@@ -1,4 +1,9 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLFloat } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLFloat,
+} = require("graphql");
 
 exports.PartnerScheduleType = new GraphQLObjectType({
   name: "PartnerSchedule",
@@ -15,7 +20,8 @@ exports.PartnerScheduleType = new GraphQLObjectType({
 exports.PartnerScheduledType = new GraphQLObjectType({
   name: "PartnerScheduled",
   fields: () => ({
+    ps_id: { type: GraphQLID },
     schedule_start: { type: GraphQLFloat },
-    schedule_end: { type: GraphQLFloat },    
+    schedule_end: { type: GraphQLFloat },
   }),
 });
