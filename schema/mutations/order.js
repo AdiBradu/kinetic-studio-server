@@ -242,7 +242,7 @@ exports.CREATE_CUSTOMER_ORDER = {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
           to: args.email, // Change to your recipient
-          from: "hello@imnot.agency", // Change to your verified sender
+          from: process.env.SENDGRID_MAIL_FROM, // Change to your verified sender
           subject: mRes[0][0].email_subject,
           text: "and easy to do anywhere, even with Node.js",
           html: mRes[0][0].email_body,
