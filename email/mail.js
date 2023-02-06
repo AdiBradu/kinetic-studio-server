@@ -2,10 +2,10 @@ const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   port: 465,
-  host: "smtp.kineticstudio.ro",
+  host: process.env.SMTP,
   auth: {
-    user: "comenzi@kineticstudio.ro",
-    pass: "COntrica@6122c",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
   secure: true,
 });
